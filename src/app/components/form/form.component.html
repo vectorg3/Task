@@ -1,0 +1,114 @@
+<form class="form" [formGroup]="form" (ngSubmit)="handleSubmit()">
+  <div class="form__container">
+    <h2 class="form__title">Форма</h2>
+    <div class="form__field">
+      <tui-input
+        tuiHintContent="Не менее 3 символов"
+        [tuiTextfieldCleaner]="true"
+        [tuiTextfieldCustomContent]="
+          !this.form.get('username')?.invalid ? success : ''
+        "
+        formControlName="username">
+        username
+      </tui-input>
+      <ng-template #success>
+        <tui-svg
+          src="tuiIconCheckLarge"
+          class="success tui-space_left-3"></tui-svg>
+      </ng-template>
+    </div>
+    <div class="form__field">
+      <tui-input-password
+        formControlName="password"
+        [tuiTextfieldCleaner]="true"
+        [tuiTextfieldCustomContent]="
+          !this.form.get('password')?.invalid ? success : ''
+        ">
+        password
+        <input tuiTextfield placeholder="Не менее 4 символов!" />
+      </tui-input-password>
+      <ng-template #success>
+        <tui-svg
+          src="tuiIconCheckLarge"
+          class="success tui-space_left-3"></tui-svg>
+      </ng-template>
+    </div>
+    <div class="form__field">
+      <tui-input
+        tuiHintContent="Не менее 2 символов"
+        [tuiTextfieldCleaner]="true"
+        [tuiTextfieldCustomContent]="
+          !this.form.get('firstName')?.invalid ? success : ''
+        "
+        formControlName="firstName">
+        firstName
+      </tui-input>
+      <ng-template #success>
+        <tui-svg
+          src="tuiIconCheckLarge"
+          class="success tui-space_left-3"></tui-svg>
+      </ng-template>
+    </div>
+    <div class="form__field">
+      <tui-input
+        tuiHintContent="Не обязательно"
+        [tuiTextfieldCleaner]="true"
+        [tuiTextfieldCustomContent]="
+          !this.form.get('lastName')?.invalid ? success : ''
+        "
+        formControlName="lastName">
+        lastName
+      </tui-input>
+      <ng-template #success>
+        <tui-svg
+          src="tuiIconCheckLarge"
+          class="success tui-space_left-3"></tui-svg>
+      </ng-template>
+    </div>
+    <div class="form__field">
+      <tui-multi-select
+        [tuiTextfieldCleaner]="true"
+        [tuiTextfieldCustomContent]="
+          !this.form.get('roles')?.invalid ? success : ''
+        "
+        placeholder="roles"
+        formControlName="roles"
+        [tuiTextfieldLabelOutside]="true"
+        [editable]="false"
+        [(search)]="search">
+        roles
+        <tui-data-list-wrapper
+          *tuiDataList
+          tuiMultiSelectGroup
+          [items]="filter(search)"></tui-data-list-wrapper>
+      </tui-multi-select>
+      <ng-template #success>
+        <tui-svg
+          src="tuiIconCheckLarge"
+          class="success tui-space_left-3"></tui-svg>
+      </ng-template>
+    </div>
+    <div class="form__field">
+      <tui-multi-select
+        [editable]="false"
+        formControlName="workBorders"
+        [stringify]="stringify"
+        [tuiTextfieldCleaner]="true">
+        workBorders
+        <tui-data-list-wrapper
+          *tuiDataList
+          tuiMultiSelectGroup
+          [items]="WORK_BORDERS"
+          [itemContent]="stringify"></tui-data-list-wrapper>
+      </tui-multi-select>
+    </div>
+    <button
+      tuiButton
+      type="submit"
+      appearance="secondary-destructive"
+      [disabled]="this.form.invalid"
+      class="form__button">
+      Создать
+    </button>
+  </div>
+</form>
