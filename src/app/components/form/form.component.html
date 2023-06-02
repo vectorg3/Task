@@ -54,10 +54,10 @@
         tuiHintContent="Не обязательно"
         [tuiTextfieldCleaner]="true"
         [tuiTextfieldCustomContent]="
-          !this.form.get('lastName')?.invalid ? success : ''
+          !this.form.get('secondName')?.invalid ? success : ''
         "
-        formControlName="lastName">
-        lastName
+        formControlName="secondName">
+        secondName
       </tui-input>
       <ng-template #success>
         <tui-svg
