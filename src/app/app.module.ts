@@ -18,7 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormComponent } from './components/form/form.component';
 import { ListComponent } from './components/list/list.component';
-import { TuiDataListWrapperModule, TuiInputModule, TuiInputPasswordModule, TuiMultiSelectModule } from '@taiga-ui/kit';
+import { TuiDataListWrapperModule, TuiInputModule, TuiInputPasswordModule, TuiIslandModule, TuiMultiSelectModule } from '@taiga-ui/kit';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -40,7 +40,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TuiTextfieldControllerModule,
     TuiMultiSelectModule,
     TuiDataListWrapperModule,
-    TuiInputPasswordModule
+    TuiInputPasswordModule,
+    TuiIslandModule
   ],
   providers: [{ provide: TUI_SANITIZER, useClass: NgDompurifySanitizer }],
   bootstrap: [AppComponent],

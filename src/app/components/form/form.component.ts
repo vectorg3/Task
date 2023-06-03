@@ -10,6 +10,7 @@ import { IWorkBorder } from 'src/app/models/USER';
 import { ROLES } from '../../constants/ROLES';
 import { WORK_BORDERS } from '../../constants/WORK_BORDERS';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -44,7 +45,7 @@ export class FormComponent {
   readonly stringify: TuiStringHandler<
     IWorkBorder | TuiContextWithImplicit<IWorkBorder>
   > = item => ('name' in item ? item.name : item.$implicit.name);
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
   @tuiPure
   filter(search: string | null): readonly string[] {
     return ROLES.filter(item => TUI_DEFAULT_MATCHER(item, search || ''));
@@ -55,5 +56,6 @@ export class FormComponent {
       id: Date.now().toString(),
       ...this.form.getRawValue(),
     });
+    this.router.navigate(['/list']);
   }
 }

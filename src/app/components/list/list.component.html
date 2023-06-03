@@ -1,1 +1,26 @@
-<p>list works!</p>
+<div class="list">
+  <div class="list__container">
+    <h1 class="list__title">Список</h1>
+    <tui-island class="list__users">
+      <tui-island class="user" *ngFor="let user of users">
+        <div class="user__info">
+          <div class="user__username">
+            {{ user.username }}
+          </div>
+          <div class="user__fullname">
+            {{ user.firstName }}
+            {{ user.secondName }}
+          </div>
+        </div>
+        <div class="user__buttons">
+          <button class="user__edit">
+            <tui-svg src="tuiIconEdit" style="font-size: 34px"></tui-svg>
+          </button>
+          <button class="user__remove" (click)="removeUser(user.id)">
+            <tui-svg src="tuiIconClose" style="font-size: 34px"></tui-svg>
+          </button>
+        </div>
+      </tui-island>
+    </tui-island>
+  </div>
+</div>
