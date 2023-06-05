@@ -1,3 +1,4 @@
+<div class="back-btn" routerLink="/list">Вернуться к списку</div>
 <form class="form" [formGroup]="form" (ngSubmit)="handleSubmit()">
   <div class="form__container">
     <h1 class="form__title">Форма</h1>
@@ -105,7 +106,6 @@
     <button
       tuiButton
       type="submit"
-      appearance="secondary-destructive"
       [disabled]="this.form.invalid"
       class="form__button">
       Сохранить

@@ -11,6 +11,7 @@ import { ROLES } from '../../constants/ROLES';
 import { WORK_BORDERS } from '../../constants/WORK_BORDERS';
 import { UserService } from 'src/app/services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Toast } from '../ui/Toast';
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -65,10 +66,16 @@ export class FormComponent {
         id: this.id,
         ...this.form.getRawValue(),
       });
+      Toast.fire({
+        title: 'Пользователь успешно отредактирован',
+      });
     } else {
       this.userService.addUser({
         id: Date.now().toString(),
         ...this.form.getRawValue(),
+      });
+      Toast.fire({
+        title: 'Пользователь успешно добавлен',
       });
     }
     this.router.navigate(['/list']);
@@ -77,7 +84,7 @@ export class FormComponent {
     if (this.id !== undefined) {
       const user = this.userService.getUser(id);
       if (user == undefined) {
-        console.log('user with that id not found');
+        this.router.navigate(['/form']);
       } else {
         const { id, ...userInfo } = user;
         this.form.setValue(userInfo);
