@@ -13,10 +13,14 @@ const routes: Routes = [
     component: FormComponent,
   },
   {
+    path: 'form/:id',
+    component: FormComponent,
+  },
+  {
     path: '**',
     redirectTo: 'form',
     pathMatch: 'full',
-  }
+  },
 ];
 
 @NgModule({

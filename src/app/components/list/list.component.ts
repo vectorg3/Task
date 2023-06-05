@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IUser } from 'src/app/models/USER';
 import { UserService } from 'src/app/services/user.service';
 
@@ -7,9 +8,9 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent {
+export class ListComponent implements OnInit {
   users: IUser[] = [];
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
   ngOnInit() {
     this.getUsers();
   }
@@ -19,5 +20,8 @@ export class ListComponent {
   removeUser(id: string) {
     this.userService.removeUser(id);
     this.getUsers();
+  }
+  openUser(id: string) {
+    this.router.navigate([`/form/${id}`]);
   }
 }

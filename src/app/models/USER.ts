@@ -5,7 +5,7 @@ export interface IUser {
   firstName: string;
   secondName: string;
   roles: string[];
-  workBorders: object[];
+  workBorders: IWorkBorder[];
 }
 export interface IWorkBorder {
   id: string;

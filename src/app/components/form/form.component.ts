@@ -10,7 +10,7 @@ import { IWorkBorder } from 'src/app/models/USER';
 import { ROLES } from '../../constants/ROLES';
 import { WORK_BORDERS } from '../../constants/WORK_BORDERS';
 import { UserService } from 'src/app/services/user.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -35,7 +35,7 @@ export class FormComponent {
       nonNullable: true,
       validators: [Validators.required],
     }),
-    workBorders: new FormControl([], {
+    workBorders: new FormControl<IWorkBorder[]>([], {
       nonNullable: true,
       validators: [Validators.required],
     }),
@@ -45,17 +45,43 @@ export class FormComponent {
   readonly stringify: TuiStringHandler<
     IWorkBorder | TuiContextWithImplicit<IWorkBorder>
   > = item => ('name' in item ? item.name : item.$implicit.name);
-  constructor(private userService: UserService, private router: Router) {}
+  private id!: string;
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private activateRoute: ActivatedRoute
+  ) {
+    this.id = activateRoute.snapshot.params['id'];
+    this.getUser(this.id);
+  }
   @tuiPure
   filter(search: string | null): readonly string[] {
     return ROLES.filter(item => TUI_DEFAULT_MATCHER(item, search || ''));
   }
 
   handleSubmit() {
-    this.userService.addUser({
-      id: Date.now().toString(),
-      ...this.form.getRawValue(),
-    });
+    if (this.id) {
+      this.userService.editUser({
+        id: this.id,
+        ...this.form.getRawValue(),
+      });
+    } else {
+      this.userService.addUser({
+        id: Date.now().toString(),
+        ...this.form.getRawValue(),
+      });
+    }
     this.router.navigate(['/list']);
+  }
+  getUser(id: string) {
+    if (this.id !== undefined) {
+      const user = this.userService.getUser(id);
+      if (user == undefined) {
+        console.log('user with that id not found');
+      } else {
+        const { id, ...userInfo } = user;
+        this.form.setValue(userInfo);
+      }
+    }
   }
 }

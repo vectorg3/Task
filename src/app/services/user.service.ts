@@ -13,7 +13,7 @@ export class UserService {
       username: 'Bogdan',
       password: '392311',
       roles: ['ANT'],
-      workBorders: [{ id: 1, name: 'Али' }],
+      workBorders: [{ id: '1', name: 'Белгатой' }],
     },
     {
       id: '2',
@@ -22,7 +22,7 @@ export class UserService {
       username: 'Maxim',
       password: '392311',
       roles: ['ANT'],
-      workBorders: [{ id: 1, name: 'Али' }],
+      workBorders: [{ id: '1', name: 'Белгатой' }],
     },
     {
       id: '3',
@@ -31,7 +31,7 @@ export class UserService {
       username: 'Anna',
       password: '392311',
       roles: ['ANT'],
-      workBorders: [{ id: 1, name: 'Али' }],
+      workBorders: [{ id: '1', name: 'Белгатой' }],
     },
   ];
   addUser(user: IUser) {
@@ -42,7 +42,16 @@ export class UserService {
     return this.users.find(item => item.id == id);
   }
   removeUser(id: string) {
-    this.users = this.users.filter(item => item.id !== id)
-    console.log(this.users)
+    this.users = this.users.filter(item => item.id !== id);
+    console.log('Пользователь успешно удалён из списка!');
+  }
+  editUser(user: IUser) {
+    this.users = this.users.map(item => {
+      if (item.id == user.id) {
+        item = user;
+      }
+      return item;
+    });
+    console.log('Пользователь успешно отредактирован!');
   }
 }

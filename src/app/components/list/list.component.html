@@ -2,7 +2,10 @@
   <div class="list__container">
     <h1 class="list__title">Список</h1>
     <tui-island class="list__users">
-      <tui-island class="user" *ngFor="let user of users">
+      <tui-island
+        class="user"
+        *ngFor="let user of users"
+        (click)="openUser(user.id)">
         <div class="user__info">
           <div class="user__username">
             {{ user.username }}
@@ -20,6 +23,9 @@
             <tui-svg src="tuiIconClose" style="font-size: 34px"></tui-svg>
           </button>
         </div>
+      </tui-island>
+      <tui-island class="user__add" routerLink="form">
+        Создать нового пользователя
       </tui-island>
     </tui-island>
   </div>
