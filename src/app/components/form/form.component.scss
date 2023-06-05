@@ -53,3 +53,16 @@
     cursor: pointer;
   }
 }
+@media (max-width: 612px) {
+  .form {
+    width: 95%;
+  }
+}
+@media (max-width: 401px) {
+  .form {
+    transform: translate(-50%, 15%);
+    &__title {
+      font-size: 22px;
+    }
+  }
+}
